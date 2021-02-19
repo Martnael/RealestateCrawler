@@ -47,7 +47,7 @@ public class TtpServices {
         String unitStatus = "";
 
 
-        Document pagePoorise = Jsoup.connect(ttpActiveProjectLinks[1]).userAgent(userAgent).get();
+        Document pagePoorise = Jsoup.connect(ttpActiveProjectLinks[0]).userAgent(userAgent).get();
         Elements poorisePlan = pagePoorise.select("div.content.active.tab_content").select("table");
         for (Element trElement : poorisePlan.select("tr")) {
             if (trElement.hasClass(" flat_row  has_link")) {

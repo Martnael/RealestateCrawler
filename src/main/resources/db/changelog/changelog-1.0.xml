@@ -12,4 +12,96 @@
             <column name="status_name" type="text"/>
         </createTable>
     </changeSet>
+    <changeSet id="19.02.2020 v.1" author="Mart">
+        <createTable tableName="county">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="county_name" type="text"/>
+        </createTable>
+        <createTable tableName="area">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="area_name" type="text"/>
+            <column name="county_id" type="int">
+                <constraints foreignKeyName="fk_area_county" references="county(id)"/>
+            </column>
+        </createTable>
+        <createTable tableName="developer">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="developer_name" type="text"/>
+        </createTable>
+        <createTable tableName="project_status">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="status_name" type="text"/>
+        </createTable>
+        <createTable tableName="project">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_name" type="text"/>
+            <column name="developer_id" type="int">
+                <constraints foreignKeyName="fk_developer_project" references="developer(id)"/>
+            </column>
+            <column name="are_id" type="int">
+                <constraints foreignKeyName="fk_area_project" references="area(id)"/>
+            </column>
+            <column name="project_status_id" type="int">
+                <constraints foreignKeyName="fk_project_status_project" references="project_status(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="19.02.2020 v.2" author="Mart">
+        <createTable tableName="unit_category">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="category_name" type="text"/>
+        </createTable>
+        <createTable tableName="unit_type">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_name" type="text"/>
+        </createTable>
+        <createTable tableName="unit_url">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_url" type="text"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="19.02.2020 v.3" author="Mart">
+        <createTable tableName="unit_info">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_number" type="text"/>
+            <column name="unit_size" type="numeric"/>
+            <column name="unit_balcony_size" type="numeric"/>
+            <column name="unit_current_price" type="numeric"/>
+            <column name="unit_construction_year" type="numeric"/>
+            <column name="Unit_scan_date" type="date"/>
+            <column name="unit_status_id" type="int">
+                <constraints foreignKeyName="fk_sale_status_unit" references="sale_status(id)"/>
+            </column>
+            <column name="project_id" type="int">
+                <constraints foreignKeyName="fk_project_unit" references="project(id)"/>
+            </column>
+            <column name="unit_category_id" type="int">
+                <constraints foreignKeyName="fk_category_unit" references="unit_category(id)"/>
+            </column>
+            <column name="unit_type_id" type="int">
+                <constraints foreignKeyName="fk_type_unit" references="unit_type(id)"/>
+            </column>
+            <column name="unit_url_id" type="int">
+                <constraints foreignKeyName="fk_url_unit" references="unit_url(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
