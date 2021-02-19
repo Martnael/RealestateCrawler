@@ -104,4 +104,34 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="19.02.2020 v.4" author="Mart">
+        <loadData
+                file="db/changelog/county.csv"
+                schemaName="public"
+                tableName="county">
+            <column header="id" name="id" type="numeric"/>
+            <column header="county_name" name="county_name" type="string"/>
+        </loadData>
+        <loadData
+                file="db/changelog/project_status.csv"
+                schemaName="public"
+                tableName="project_status">
+            <column header="id" name="id" type="numeric"/>
+            <column header="status_name" name="status_name" type="string"/>
+        </loadData>
+        <loadData
+                file="db/changelog/sale_status.csv"
+                schemaName="public"
+                tableName="sale_status">
+            <column header="id" name="id" type="numeric"/>
+            <column header="status_name" name="status_name" type="string"/>
+        </loadData>
+        <loadData
+                file="db/changelog/unit_category.csv"
+                schemaName="public"
+                tableName="unit_category">
+            <column header="id" name="id" type="numeric"/>
+            <column header="category_name" name="category_name" type="string"/>
+        </loadData>
+    </changeSet>
 </databaseChangeLog>
