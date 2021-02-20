@@ -5,6 +5,8 @@ import com.adaur.Crawler.repository.CrawlerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class Services {
 
@@ -25,6 +27,10 @@ public class Services {
         } catch (Exception e) {
             throw new CrawlerException("Developer already in database");
         }
+    }
+
+    public List<Developer> getAllDeveloper() {
+        return crawlerRepository.getAllDevelopers();
     }
 
 }
