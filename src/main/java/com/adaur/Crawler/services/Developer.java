@@ -2,7 +2,7 @@ package com.adaur.Crawler.services;
 
 public class Developer {
     private int developerId;
-    private String developer_name;
+    private String developerName;
 
     public int getDeveloperId() {
         return developerId;
@@ -12,11 +12,11 @@ public class Developer {
         this.developerId = developerId;
     }
 
-    public String getDeveloper_name() {
-        return developer_name;
+    public String getDeveloperName() {
+        return developerName;
     }
 
-    public void setDeveloper_name(String developer_name) {
-        this.developer_name = developer_name;
+    public void setDeveloperName(String developerName) {
+        this.developerName = developerName;
     }
 }

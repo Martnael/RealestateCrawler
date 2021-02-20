@@ -17,7 +17,7 @@ public class CrawlerRepository {
     public void addDeveloper (Developer developer) {
         String sql = "INSERT INTO developer (developer_name) " + "VALUES (:developer_name)";
         Map<String, Object> paraMap = new HashMap<>();
-        paraMap.put("developer_name", developer.getDeveloper_name());
+        paraMap.put("developer_name", developer.getDeveloperName());
         template.update(sql, paraMap);
     }
 

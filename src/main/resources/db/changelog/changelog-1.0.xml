@@ -134,4 +134,7 @@
             <column header="category_name" name="category_name" type="string"/>
         </loadData>
     </changeSet>
+    <changeSet id="20.02.2021 v.1" author="Mart">
+        <addUniqueConstraint tableName="developer" columnNames="developer_name"/>
+    </changeSet>
 </databaseChangeLog>
