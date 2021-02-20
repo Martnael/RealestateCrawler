@@ -9,11 +9,11 @@ public class Services {
 
     @Autowired
     private CrawlerRepository crawlerRepository;
-    @Autowired
-    private ActionResponse response;
+
 
     public ActionResponse addDeveloper(Developer developer) {
         crawlerRepository.addDeveloper(developer);
+        ActionResponse response = new ActionResponse();
         response.setResponseMessage("Developer added to database");
         return response;
     }

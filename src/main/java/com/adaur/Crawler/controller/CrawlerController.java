@@ -1,5 +1,6 @@
 package com.adaur.Crawler.controller;
 
+import com.adaur.Crawler.services.ActionResponse;
 import com.adaur.Crawler.services.Developer;
 import com.adaur.Crawler.services.Services;
 import com.adaur.Crawler.services.TtpServices;
@@ -21,8 +22,8 @@ public class CrawlerController {
     }
 
     @PostMapping("adddeveloper")
-    public void adddeveloper(@RequestBody Developer developer) {
-        crawlerServices.addDeveloper(developer);
+    public ActionResponse adddeveloper(@RequestBody Developer developer) {
+        return crawlerServices.addDeveloper(developer);
     }
 
 
