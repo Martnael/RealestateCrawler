@@ -48,7 +48,7 @@
             <column name="developer_id" type="int">
                 <constraints foreignKeyName="fk_developer_project" references="developer(id)"/>
             </column>
-            <column name="are_id" type="int">
+            <column name="area_id" type="int">
                 <constraints foreignKeyName="fk_area_project" references="area(id)"/>
             </column>
             <column name="project_status_id" type="int">
@@ -136,5 +136,8 @@
     </changeSet>
     <changeSet id="20.02.2021 v.1" author="Mart">
         <addUniqueConstraint tableName="developer" columnNames="developer_name"/>
+    </changeSet>
+    <changeSet id="21.02.2021 v.1" author="Mart">
+        <addUniqueConstraint tableName="area" columnNames="area_name"/>
     </changeSet>
 </databaseChangeLog>

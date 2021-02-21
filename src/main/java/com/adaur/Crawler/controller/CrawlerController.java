@@ -1,9 +1,6 @@
 package com.adaur.Crawler.controller;
 
-import com.adaur.Crawler.services.ActionResponse;
-import com.adaur.Crawler.services.Developer;
-import com.adaur.Crawler.services.Services;
-import com.adaur.Crawler.services.TtpServices;
+import com.adaur.Crawler.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,5 +29,15 @@ public class CrawlerController {
     @GetMapping("alldevelopers")
     public List<Developer> allDevelopers() {
         return crawlerServices.getAllDeveloper();
+    }
+
+    @PostMapping("addarea")
+    public ActionResponse addArea(@RequestBody Area area) {
+        return crawlerServices.addArea(area);
+    }
+
+    @GetMapping("getcounties")
+    public List<County> allCounties() {
+        return crawlerServices.getAllCounties();
     }
 }

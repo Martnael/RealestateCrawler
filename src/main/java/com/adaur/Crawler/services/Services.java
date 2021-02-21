@@ -1,10 +1,13 @@
 package com.adaur.Crawler.services;
 
+import com.adaur.Crawler.entity.CountyEntity;
+import com.adaur.Crawler.entity.CountyEntityRepository;
 import com.adaur.Crawler.exceptions.CrawlerException;
 import com.adaur.Crawler.repository.CrawlerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,9 +15,11 @@ public class Services {
 
     @Autowired
     private CrawlerRepository crawlerRepository;
+    @Autowired
+    private CountyEntityRepository countyEntityRepository;
 
     /**
-     * Add Developer to database. Developer name have to be unique in database.
+     * Add Developer to database. Developer name have to be unique in database. With SQL query method
      * @param developer
      * @return Message or Exception
      */
@@ -29,8 +34,66 @@ public class Services {
         }
     }
 
+    /**
+     * Get list of all developers in database. With SQL query method
+     * @return
+     */
+
     public List<Developer> getAllDeveloper() {
         return crawlerRepository.getAllDevelopers();
     }
+
+    /**
+     * Add area to Database. Check countyId from areaName. With SQL query method
+     *
+     * @param area
+     * @return response
+     */
+
+    public ActionResponse addArea(Area area) {
+        try {
+            area.setCountyId(crawlerRepository.getCountyId(area.getCountyName()));
+        } catch (Exception e) {
+            throw new CrawlerException("No such county in database!");
+        }
+        try {
+            crawlerRepository.addArea(area);
+            ActionResponse response = new ActionResponse();
+            response.setResponseMessage("Area added to database.");
+            return response;
+        } catch (Exception e) {
+            throw new CrawlerException("Area is already in database!");
+        }
+    }
+
+    /**
+     * Map Entity County to regular county.
+     * @param countyEntity
+     * @return County county
+     */
+
+    public County mapEntityCounty(CountyEntity countyEntity) {
+        County county = new County();
+        county.setId(countyEntity.getId());
+        county.setCountyName(countyEntity.getCountyName());
+        return county;
+    }
+
+    /**
+     * Get all counties with hibernate method.
+     *
+     * @return list of counties in database
+     */
+
+    public List<County> getAllCounties() {
+        List<CountyEntity> countyEntities = countyEntityRepository.findAll();
+        List<County> counties = new ArrayList<>();
+        for (CountyEntity countyEntity : countyEntities) {
+            County county = mapEntityCounty(countyEntity);
+            counties.add(county);
+        }
+        return counties;
+    }
+
 
 }
