@@ -96,7 +96,7 @@ public class CrawlerRepository {
                 "unit_current_price, unit_construction_year, unit_scan_date, unit_status_id," +
                 "project_id, unit_category_id, unit_type_id, unit_url, unit_rooms, unit_floor) " +
                 "VALUES (:unit_number, :unit_size, :unit_balcony_size," +
-                ":unit_current_price, :unit_construction_year, :Unit_scan_date, :unit_status_id," +
+                ":unit_current_price, :unit_construction_year, :unit_scan_date, :unit_status_id," +
                 ":project_id, :unit_category_id, :unit_type_id, :unit_url, :unit_rooms, :unit_floor)";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("unit_number", unit.getUnitNumber());
