@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Unit {
+    private String developer;
+    private int developerId;
     private String unitNumber;
     private double unitSize;
     private double unitBalconySize;
@@ -165,5 +167,21 @@ public class Unit {
 
     public void setUnitFloor(int unitFloor) {
         this.unitFloor = unitFloor;
+    }
+
+    public String getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(String developer) {
+        this.developer = developer;
+    }
+
+    public int getDeveloperId() {
+        return developerId;
+    }
+
+    public void setDeveloperId(int developerId) {
+        this.developerId = developerId;
     }
 }

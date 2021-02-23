@@ -83,12 +83,14 @@ public class TtpServices {
             }
             if (!unitNumber.isBlank()) {
                 unit.setUnitNumber(unitNumber);
+                unit.setDeveloperId(developerId);
                 unit.setUnitSize(unitSize);
                 unit.setUnitBalconySize(unitBalconySize);
                 unit.setUnitPrice(unitPrice);
                 unit.setUnitConstructionYear(unitConstructionYear);
                 unit.setUnitScanTime(date);
                 unit.setUnitStatus(unitStatus);
+                unit.setUnitStatusId(getUnitStatusId(unitStatus));
                 unit.setUnitProjectId(projectId);
                 unit.setUnitTypeId(unitTypeId);
                 unit.setUnitCategoryId(unitCategoryId);
@@ -99,6 +101,16 @@ public class TtpServices {
             }
         }
         return unitList;
+    }
+
+    public int getUnitStatusId (String unitStatus) {
+        if (unitStatus.equals("Vaba") || unitStatus.equals("Naidiskorter")) {
+            return 1;
+        } else if (unitStatus.equals("Muudud") || unitStatus.equals("Müüdud")) {
+            return 3;
+        } else {
+            return 2;
+        }
     }
 }
 

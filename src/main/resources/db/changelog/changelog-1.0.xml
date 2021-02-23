@@ -69,12 +69,6 @@
             </column>
             <column name="unit_name" type="text"/>
         </createTable>
-        <createTable tableName="unit_url">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="unit_url" type="text"/>
-        </createTable>
     </changeSet>
     <changeSet id="19.02.2020 v.3" author="Mart">
         <createTable tableName="unit_info">
@@ -86,7 +80,7 @@
             <column name="unit_balcony_size" type="numeric"/>
             <column name="unit_current_price" type="numeric"/>
             <column name="unit_construction_year" type="numeric"/>
-            <column name="Unit_scan_date" type="date"/>
+            <column name="unit_scan_date" type="date"/>
             <column name="unit_status_id" type="int">
                 <constraints foreignKeyName="fk_sale_status_unit" references="sale_status(id)"/>
             </column>
@@ -99,9 +93,7 @@
             <column name="unit_type_id" type="int">
                 <constraints foreignKeyName="fk_type_unit" references="unit_type(id)"/>
             </column>
-            <column name="unit_url_id" type="int">
-                <constraints foreignKeyName="fk_url_unit" references="unit_url(id)"/>
-            </column>
+            <column name="unit_url" type="text"/>
         </createTable>
     </changeSet>
     <changeSet id="19.02.2020 v.4" author="Mart">

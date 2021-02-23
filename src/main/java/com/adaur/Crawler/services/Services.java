@@ -7,6 +7,7 @@ import com.adaur.Crawler.repository.CrawlerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,12 @@ public class Services {
     private CrawlerRepository crawlerRepository;
     @Autowired
     private CountyEntityRepository countyEntityRepository;
+    @Autowired
+    private TtpServices ttpServices;
+
+    public void startTheCrawling() throws IOException {
+        updateProjectDatabase(ttpServices.poorise5Crawler());
+    }
 
     /**
      * Add Developer to database. Developer name have to be unique in database. With SQL query method
@@ -128,5 +135,12 @@ public class Services {
         ActionResponse response = new ActionResponse();
         response.setResponseMessage("Deleted from database.");
         return response;
+    }
+
+    public void updateProjectDatabase (List<Unit> unitList) {
+        for (Unit unit : unitList) {
+            crawlerRepository.addUnitToDB(unit);
+
+        }
     }
 }

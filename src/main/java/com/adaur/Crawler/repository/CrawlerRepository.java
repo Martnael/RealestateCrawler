@@ -4,6 +4,7 @@ import com.adaur.Crawler.rowMappers.DeveloperRowMapper;
 import com.adaur.Crawler.services.Area;
 import com.adaur.Crawler.services.County;
 import com.adaur.Crawler.services.Developer;
+import com.adaur.Crawler.services.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -90,8 +91,28 @@ public class CrawlerRepository {
         template.update(sql, paraMap);
     }
 
-    public void deleteCounty (int countyID) {
-        String sql = "DELETE FROM county WHERE id = :id";
+    public void addUnitToDB (Unit unit) {
+        String sql = "INSERT INTO unit_info (unit_number, unit_size, unit_balcony_size," +
+                "unit_current_price, unit_construction_year, unit_scan_date, unit_status_id," +
+                "project_id, unit_category_id, unit_type_id, unit_url, unit_rooms, unit_floor) " +
+                "VALUES (:unit_number, :unit_size, :unit_balcony_size," +
+                ":unit_current_price, :unit_construction_year, :Unit_scan_date, :unit_status_id," +
+                ":project_id, :unit_category_id, :unit_type_id, :unit_url, :unit_rooms, :unit_floor)";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("unit_number", unit.getUnitNumber());
+        paraMap.put("unit_size", unit.getUnitSize());
+        paraMap.put("unit_balcony_size", unit.getUnitBalconySize());
+        paraMap.put("unit_current_price", unit.getUnitPrice());
+        paraMap.put("unit_construction_year", unit.getUnitConstructionYear());
+        paraMap.put("unit_scan_date", unit.getUnitScanTime());
+        paraMap.put("unit_status_id", unit.getUnitStatusId());
+        paraMap.put("project_id", unit.getUnitProjectId());
+        paraMap.put("unit_category_id", unit.getUnitCategoryId());
+        paraMap.put("unit_type_id", unit.getUnitTypeId());
+        paraMap.put("unit_url", unit.getUnitUrl());
+        paraMap.put("unit_rooms", unit.getUnitRooms());
+        paraMap.put("unit_floor", unit.getUnitFloor());
+        template.update(sql, paraMap);
     }
 
 }
