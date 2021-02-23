@@ -4,6 +4,7 @@ import com.adaur.Crawler.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping("crawler")
@@ -17,15 +18,45 @@ public class CrawlerController {
 
     // Not ready still for crawling
     @GetMapping("starttheengine")
-    public void startCrawling() {
-
+    public List<Unit> startCrawling() throws IOException {
+        return ttpCrawler.poorise5Crawler();
     }
+
+    @CrossOrigin
+    @GetMapping("getcounties")
+    public List<County> allCounties() {
+        return crawlerServices.getAllCounties();
+    }
+
+    @CrossOrigin
+    @PostMapping("addcounty")
+    public ActionResponse addCounty (@RequestBody County county) {
+        return crawlerServices.addCounty(county);
+    }
+
+    @CrossOrigin
+    @PutMapping("deletecounty")
+    public ActionResponse deleteCounty (@RequestParam("id") int countyID) {
+        return crawlerServices.deleteCounty(countyID);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     @PostMapping("adddeveloper")
     public ActionResponse addDeveloper(@RequestBody Developer developer) {
         return crawlerServices.addDeveloper(developer);
     }
 
+    @CrossOrigin
     @GetMapping("alldevelopers")
     public List<Developer> allDevelopers() {
         return crawlerServices.getAllDeveloper();
@@ -36,8 +67,12 @@ public class CrawlerController {
         return crawlerServices.addArea(area);
     }
 
-    @GetMapping("getcounties")
-    public List<County> allCounties() {
-        return crawlerServices.getAllCounties();
+
+
+    @PutMapping("editdeveloper")
+    public ActionResponse editDeveloper (@RequestBody Developer developer) {
+        return crawlerServices.editDeveloper(developer);
     }
+
+
 }

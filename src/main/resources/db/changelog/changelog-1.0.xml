@@ -109,28 +109,28 @@
                 file="db/changelog/county.csv"
                 schemaName="public"
                 tableName="county">
-            <column header="id" name="id" type="numeric"/>
+            <column header="id" name="id" type="skip"/>
             <column header="county_name" name="county_name" type="string"/>
         </loadData>
         <loadData
                 file="db/changelog/project_status.csv"
                 schemaName="public"
                 tableName="project_status">
-            <column header="id" name="id" type="numeric"/>
+            <column header="id" name="id" type="skip"/>
             <column header="status_name" name="status_name" type="string"/>
         </loadData>
         <loadData
                 file="db/changelog/sale_status.csv"
                 schemaName="public"
                 tableName="sale_status">
-            <column header="id" name="id" type="numeric"/>
+            <column header="id" name="id" type="skip"/>
             <column header="status_name" name="status_name" type="string"/>
         </loadData>
         <loadData
                 file="db/changelog/unit_category.csv"
                 schemaName="public"
                 tableName="unit_category">
-            <column header="id" name="id" type="numeric"/>
+            <column header="id" name="id" type="skip"/>
             <column header="category_name" name="category_name" type="string"/>
         </loadData>
     </changeSet>
@@ -139,5 +139,14 @@
     </changeSet>
     <changeSet id="21.02.2021 v.1" author="Mart">
         <addUniqueConstraint tableName="area" columnNames="area_name"/>
+    </changeSet>
+    <changeSet id="23.02.2021 v.1" author="Mart">
+        <addUniqueConstraint tableName="county" columnNames="county_name"/>
+    </changeSet>
+    <changeSet id="23.02.2021 v.2" author="Mart">
+        <addColumn tableName="unit_info">
+            <column name="unit_rooms" type="int"/>
+            <column name="unit_floor" type="int"/>
+        </addColumn>
     </changeSet>
 </databaseChangeLog>

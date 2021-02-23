@@ -95,5 +95,38 @@ public class Services {
         return counties;
     }
 
+    public ActionResponse editDeveloper(Developer developer) {
+        ActionResponse response = new ActionResponse();
+        return response;
+    }
 
+    /**
+     * Add new county to the database. with SQL query. Returns response if that county is already in database.
+     * County have to be unique.
+     * @param county
+     * @return
+     */
+
+    public ActionResponse addCounty(County county) {
+        try {
+            crawlerRepository.addCounty(county);
+            ActionResponse response = new ActionResponse();
+            response.setResponseMessage("County added to database.");
+            return response;
+        } catch (Exception e) {
+            throw new CrawlerException("County is already in database");
+        }
+    }
+
+    /**
+     * Delete county base from countyID
+     * @param countyID
+     * @return
+     */
+
+    public ActionResponse deleteCounty(int countyID) {
+        ActionResponse response = new ActionResponse();
+        response.setResponseMessage("Deleted from database.");
+        return response;
+    }
 }

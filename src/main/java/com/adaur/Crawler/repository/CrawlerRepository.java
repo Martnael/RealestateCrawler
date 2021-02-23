@@ -2,6 +2,7 @@ package com.adaur.Crawler.repository;
 
 import com.adaur.Crawler.rowMappers.DeveloperRowMapper;
 import com.adaur.Crawler.services.Area;
+import com.adaur.Crawler.services.County;
 import com.adaur.Crawler.services.Developer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -65,7 +66,7 @@ public class CrawlerRepository {
     }
 
     /**
-     * Add area to the Database. No double entry allowed.
+     * Add area to the Database. Double entry not allowed.
      * @param area
      */
 
@@ -77,6 +78,21 @@ public class CrawlerRepository {
         template.update(sql, paraMap);
     }
 
+    /**
+     * Add county to the table. Double entry not allowed.
+     * @param county
+     */
+
+    public void addCounty (County county) {
+        String sql = "INSERT INTO county (county_name) VALUES (:county_name)";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("county_name", county.getCountyName());
+        template.update(sql, paraMap);
+    }
+
+    public void deleteCounty (int countyID) {
+        String sql = "DELETE FROM county WHERE id = :id";
+    }
 
 }
 
