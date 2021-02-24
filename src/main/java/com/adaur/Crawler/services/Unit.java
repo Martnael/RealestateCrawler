@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Unit {
+
+    private int unitId;
     private String developer;
     private int developerId;
     private String unitNumber;
@@ -183,5 +185,13 @@ public class Unit {
 
     public void setDeveloperId(int developerId) {
         this.developerId = developerId;
+    }
+
+    public int getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(int unitId) {
+        this.unitId = unitId;
     }
 }

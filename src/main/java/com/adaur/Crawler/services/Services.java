@@ -21,9 +21,23 @@ public class Services {
     @Autowired
     private TtpServices ttpServices;
 
+    // All programs under here
+
     public void startTheCrawling() throws IOException {
-        updateProjectDatabase(ttpServices.poorise5Crawler());
+        List<Unit> unit = ttpServices.poorise5Crawler();
+        updateProjectDatabase(unit);
+
+
+
+
     }
+
+
+
+
+
+
+
 
     /**
      * Add Developer to database. Developer name have to be unique in database. With SQL query method
@@ -139,8 +153,17 @@ public class Services {
 
     public void updateProjectDatabase (List<Unit> unitList) {
         for (Unit unit : unitList) {
-            crawlerRepository.addUnitToDB(unit);
-
+            if (crawlerRepository.unitCountInDatabase(unit) != 1) {
+                crawlerRepository.addUnitToDB(unit);
+            } else {
+                crawlerRepository.checkUnitPriceChange(unit);
+            }
         }
+    }
+
+    public boolean isUnitInDatabase (Unit unit) {
+
+
+        return true;
     }
 }

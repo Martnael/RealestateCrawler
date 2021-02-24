@@ -141,4 +141,14 @@
             <column name="unit_floor" type="int"/>
         </addColumn>
     </changeSet>
+    <changeSet id="24.02.2021 v.1" author="Mart">
+        <createTable tableName="price_history">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_price" type="numeric"/>
+            <column name="price_date" type="date"/>
+            <column name="unit_id" type="int"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
