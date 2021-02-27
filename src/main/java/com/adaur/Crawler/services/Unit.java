@@ -12,6 +12,7 @@ public class Unit {
     private double unitSize;
     private double unitBalconySize;
     private BigDecimal unitPrice;
+    private BigDecimal unitSqrMPrice;
     private String unitStatus;
     private int unitStatusId;
     private String projectName;
@@ -26,6 +27,7 @@ public class Unit {
     private Date unitScanTime;
     private int unitRooms;
     private int unitFloor;
+
 
     public String getUnitNumber() {
         return unitNumber;
@@ -193,5 +195,13 @@ public class Unit {
 
     public void setUnitId(int unitId) {
         this.unitId = unitId;
+    }
+
+    public BigDecimal getUnitSqrMPrice() {
+        return unitSqrMPrice;
+    }
+
+    public void setUnitSqrMPrice(BigDecimal unitSqrMPrice) {
+        this.unitSqrMPrice = unitSqrMPrice;
     }
 }

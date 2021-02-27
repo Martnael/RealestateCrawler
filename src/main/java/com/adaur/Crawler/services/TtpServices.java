@@ -43,6 +43,7 @@ public class TtpServices {
         double unitSize = 0;
         double unitBalconySize = 0;
         BigDecimal unitPrice = BigDecimal.ZERO;
+        BigDecimal unitSqrMPrice = BigDecimal.ZERO;
         String unitStatus = "";
 
 
@@ -81,6 +82,7 @@ public class TtpServices {
                 }
 
             }
+            unitSqrMPrice = calculateUnitSqrMPrice(unitSize, unitPrice);
             if (!unitNumber.isBlank()) {
                 unit.setUnitNumber(unitNumber);
                 unit.setDeveloperId(developerId);
@@ -97,6 +99,7 @@ public class TtpServices {
                 unit.setUnitUrl(unitUrl);
                 unit.setUnitFloor(unitFloorNumber);
                 unit.setUnitRooms(unitRoomsNumber);
+                unit.setUnitSqrMPrice(unitSqrMPrice);
                 unitList.add(unit);
             }
         }
@@ -111,6 +114,12 @@ public class TtpServices {
         } else {
             return 2;
         }
+    }
+
+    public BigDecimal calculateUnitSqrMPrice (Double unitSize, BigDecimal unitPrice) {
+        BigDecimal unitSizeBig = BigDecimal.valueOf(unitSize);
+        BigDecimal unitSqrMPrice = unitPrice.divide(unitSizeBig);
+        return unitSqrMPrice;
     }
 }
 

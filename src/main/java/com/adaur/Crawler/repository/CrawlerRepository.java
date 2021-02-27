@@ -99,10 +99,10 @@ public class CrawlerRepository {
     public void addUnitToDB (Unit unit) {
         String sql = "INSERT INTO unit_info (unit_number, unit_size, unit_balcony_size," +
                 "unit_current_price, unit_construction_year, unit_scan_date, unit_status_id," +
-                "project_id, unit_category_id, unit_type_id, unit_url, unit_rooms, unit_floor) " +
+                "project_id, unit_category_id, unit_type_id, unit_url, unit_rooms, unit_floor, sqrm_price) " +
                 "VALUES (:unit_number, :unit_size, :unit_balcony_size," +
                 ":unit_current_price, :unit_construction_year, :unit_scan_date, :unit_status_id," +
-                ":project_id, :unit_category_id, :unit_type_id, :unit_url, :unit_rooms, :unit_floor)";
+                ":project_id, :unit_category_id, :unit_type_id, :unit_url, :unit_rooms, :unit_floor, :sqrm_price)";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("unit_number", unit.getUnitNumber());
         paraMap.put("unit_size", unit.getUnitSize());
@@ -117,6 +117,7 @@ public class CrawlerRepository {
         paraMap.put("unit_url", unit.getUnitUrl());
         paraMap.put("unit_rooms", unit.getUnitRooms());
         paraMap.put("unit_floor", unit.getUnitFloor());
+        paraMap.put("sqrm_price", unit.getUnitSqrMPrice());
         template.update(sql, paraMap);
     }
 

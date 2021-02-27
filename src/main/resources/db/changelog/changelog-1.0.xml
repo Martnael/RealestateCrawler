@@ -151,4 +151,17 @@
             <column name="unit_id" type="int"/>
         </createTable>
     </changeSet>
+    <changeSet id="27.02.2021 v.1" author="Mart">
+        <createTable tableName="sqrm_price_history">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="sqrm_price" type="numeric"/>
+            <column name="price_date" type="date"/>
+            <column name="project_id" type="int"/>
+        </createTable>
+        <addColumn tableName="unit_info">
+            <column name="sqrm_price" type="numeric"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
