@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,8 +41,8 @@ public class TtpServices {
         String unitNumber = "";
         int unitFloorNumber = 0;
         int unitRoomsNumber = 0;
-        double unitSize = 0;
-        double unitBalconySize = 0;
+        BigDecimal unitSize = BigDecimal.ZERO;
+        BigDecimal unitBalconySize = BigDecimal.ZERO;
         BigDecimal unitPrice = BigDecimal.ZERO;
         BigDecimal unitSqrMPrice = BigDecimal.ZERO;
         String unitStatus = "";
@@ -57,8 +58,8 @@ public class TtpServices {
                 unitNumber = trElement.select("td.flat_nr").text();
                 unitFloorNumber = Integer.parseInt(trElement.select("td.floor").text());
                 unitRoomsNumber = Integer.parseInt(trElement.select("td.rooms").text());
-                unitSize = Double.parseDouble(trElement.select("td.size").text());
-                unitBalconySize = Double.parseDouble(trElement.select("td.balcony").text());
+                unitSize = new BigDecimal(trElement.select("td.size").text());
+                unitBalconySize = new BigDecimal(trElement.select("td.balcony").text());
                 if ((trElement.select("td.price  ").text()).startsWith("N")) {
                     unitPrice = BigDecimal.ZERO;
                     unitStatus = "Naidiskorter";
@@ -71,8 +72,8 @@ public class TtpServices {
                 unitNumber = trElement.select("td.flat_nr").text();
                 unitFloorNumber = Integer.parseInt(trElement.select("td.floor").text());
                 unitRoomsNumber = Integer.parseInt(trElement.select("td.rooms").text());
-                unitSize = Double.parseDouble(trElement.select("td.size").text());
-                unitBalconySize = Double.parseDouble(trElement.select("td.balcony").text());
+                unitSize = new BigDecimal(trElement.select("td.size").text());
+                unitBalconySize = new BigDecimal(trElement.select("td.balcony").text());
                 if (trElement.hasClass("price reserved ")) {
                     unitPrice = BigDecimal.ZERO;
                     unitStatus = "Broneeritud";
@@ -82,8 +83,9 @@ public class TtpServices {
                 }
 
             }
-            unitSqrMPrice = calculateUnitSqrMPrice(unitSize, unitPrice);
+
             if (!unitNumber.isBlank()) {
+                unit.setUnitSqrMPrice(calculateUnitSqrMPrice(unitSize, unitPrice));
                 unit.setUnitNumber(unitNumber);
                 unit.setDeveloperId(developerId);
                 unit.setUnitSize(unitSize);
@@ -99,7 +101,6 @@ public class TtpServices {
                 unit.setUnitUrl(unitUrl);
                 unit.setUnitFloor(unitFloorNumber);
                 unit.setUnitRooms(unitRoomsNumber);
-                unit.setUnitSqrMPrice(unitSqrMPrice);
                 unitList.add(unit);
             }
         }
@@ -116,10 +117,13 @@ public class TtpServices {
         }
     }
 
-    public BigDecimal calculateUnitSqrMPrice (Double unitSize, BigDecimal unitPrice) {
-        BigDecimal unitSizeBig = BigDecimal.valueOf(unitSize);
-        BigDecimal unitSqrMPrice = unitPrice.divide(unitSizeBig);
-        return unitSqrMPrice;
+    public BigDecimal calculateUnitSqrMPrice (BigDecimal unitSize, BigDecimal unitPrice) {
+        if (unitSize.equals(0) || unitPrice.equals(0) || unitPrice.equals(null) || unitSize.equals(null)) {
+            return null;
+        } else {
+            BigDecimal unitSqrMPrice = unitPrice.divide(unitSize, 2, RoundingMode.HALF_UP);
+            return unitSqrMPrice;
+        }
     }
 }
 

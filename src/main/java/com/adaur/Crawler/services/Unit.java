@@ -9,8 +9,8 @@ public class Unit {
     private String developer;
     private int developerId;
     private String unitNumber;
-    private double unitSize;
-    private double unitBalconySize;
+    private BigDecimal unitSize;
+    private BigDecimal unitBalconySize;
     private BigDecimal unitPrice;
     private BigDecimal unitSqrMPrice;
     private String unitStatus;
@@ -37,19 +37,19 @@ public class Unit {
         this.unitNumber = unitNumber;
     }
 
-    public double getUnitSize() {
+    public BigDecimal getUnitSize() {
         return unitSize;
     }
 
-    public void setUnitSize(double unitSize) {
+    public void setUnitSize(BigDecimal unitSize) {
         this.unitSize = unitSize;
     }
 
-    public double getUnitBalconySize() {
+    public BigDecimal getUnitBalconySize() {
         return unitBalconySize;
     }
 
-    public void setUnitBalconySize(double unitBalconySize) {
+    public void setUnitBalconySize(BigDecimal unitBalconySize) {
         this.unitBalconySize = unitBalconySize;
     }
 
