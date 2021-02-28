@@ -142,7 +142,7 @@
         </addColumn>
     </changeSet>
     <changeSet id="24.02.2021 v.1" author="Mart">
-        <createTable tableName="price_history">
+        <createTable tableName="unit_price_history">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
@@ -152,7 +152,7 @@
         </createTable>
     </changeSet>
     <changeSet id="27.02.2021 v.1" author="Mart">
-        <createTable tableName="sqrm_price_history">
+        <createTable tableName="project_sqrm_price_history">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
@@ -164,4 +164,24 @@
             <column name="sqrm_price" type="numeric"/>
         </addColumn>
     </changeSet>
+    <changeSet id="28.02.2021" author="Mart">
+        <addColumn tableName="project">
+            <column name="sqrm_price" type="numeric"/>
+        </addColumn>
+        <addColumn tableName="unit_price_history">
+            <column name="sqrm_price" type="numeric"/>
+        </addColumn>
+    </changeSet>
+<!--    <changeSet id="28.02.2021 v.2" author="Mart">-->
+<!--        <addForeignKeyConstraint baseTableName="unit_info"-->
+<!--                                 baseColumnNames="id"-->
+<!--                                 constraintName="unit_info_to_unit_price_history"-->
+<!--                                 referencedTableName="unit_price_history"-->
+<!--                                 referencedColumnNames="unit_id"/>-->
+<!--        <addForeignKeyConstraint baseTableName="project"-->
+<!--                                 baseColumnNames="id"-->
+<!--                                 constraintName="project_to_project_sqrm_price_history"-->
+<!--                                 referencedTableName="project_sqrm_price_history"-->
+<!--                                 referencedColumnNames="project_id"/>-->
+<!--    </changeSet>-->
 </databaseChangeLog>

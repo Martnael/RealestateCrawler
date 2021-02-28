@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,6 +153,11 @@ public class Services {
         return response;
     }
 
+    /**
+     *
+     * @param unitList
+     */
+
     public void updateProjectDatabase (List<Unit> unitList) {
         for (Unit unit : unitList) {
             if (crawlerRepository.unitCountInDatabase(unit) != 1) {
@@ -161,6 +168,45 @@ public class Services {
         }
     }
 
+    /**
+     * Calculating unit square meter price. If unit price is null then returns null
+     * @param unitSize BigDecimal
+     * @param unitPrice BigDecimal
+     * @return BigDecimal unit square meter price
+     */
+
+    public BigDecimal calculateUnitSqrMPrice (BigDecimal unitSize, BigDecimal unitPrice) {
+        if (unitSize.equals(0) || unitPrice.equals(0) || unitPrice.equals(null) || unitSize.equals(null)) {
+            return null;
+        } else {
+            BigDecimal unitSqrMPrice = unitPrice.divide(unitSize, 2, RoundingMode.HALF_UP);
+            return unitSqrMPrice;
+        }
+    }
+
+    /**
+     * Calculate project average square meter price.
+     * @param unitList
+     * @return
+     */
+
+    public BigDecimal calculateProjectSqrMPrice (List<Unit> unitList) {
+        List<BigDecimal> unitSqrMPriceValues = new ArrayList<>();
+        for (Unit unit : unitList) {
+            if (unit.getUnitSqrMPrice().compareTo(BigDecimal.ZERO) > 0) {
+                unitSqrMPriceValues.add(unit.getUnitSqrMPrice());
+            }
+        }
+        BigDecimal sumOfPrices = unitSqrMPriceValues.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal numberOfUnits = BigDecimal.valueOf(unitSqrMPriceValues.size());
+        return sumOfPrices.divide(numberOfUnits, 2, RoundingMode.HALF_UP );
+    }
+
+    /**
+     * check is unit in unit_info table. If is then only compare price and if needed to change price.
+     * @param unit
+     * @return
+     */
     public boolean isUnitInDatabase (Unit unit) {
 
 

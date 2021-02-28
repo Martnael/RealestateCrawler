@@ -4,17 +4,20 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class TtpServices {
+
+    @Autowired
+    private Services services;
 
     /**
      * Main crawler engine for TTP project Poorise
@@ -36,7 +39,7 @@ public class TtpServices {
         String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36";
         String url = "https://poorise.uusmaa.ee/houses/poorise-5/";
 
-        // Values what will be overwritten
+        // Values what will be overwritten during the crawling
         String unitUrl = "";
         String unitNumber = "";
         int unitFloorNumber = 0;
@@ -83,9 +86,9 @@ public class TtpServices {
                 }
 
             }
-
+            // first unit is empty unit from webpage to avoid this unit to getting to the list
             if (!unitNumber.isBlank()) {
-                unit.setUnitSqrMPrice(calculateUnitSqrMPrice(unitSize, unitPrice));
+                unit.setUnitSqrMPrice(services.calculateUnitSqrMPrice(unitSize, unitPrice));
                 unit.setUnitNumber(unitNumber);
                 unit.setDeveloperId(developerId);
                 unit.setUnitSize(unitSize);
@@ -107,6 +110,12 @@ public class TtpServices {
         return unitList;
     }
 
+    /**
+     * change according to page status to numerical value.
+     * @param unitStatus
+     * @return
+     */
+
     public int getUnitStatusId (String unitStatus) {
         if (unitStatus.equals("Vaba") || unitStatus.equals("Naidiskorter")) {
             return 1;
@@ -117,13 +126,6 @@ public class TtpServices {
         }
     }
 
-    public BigDecimal calculateUnitSqrMPrice (BigDecimal unitSize, BigDecimal unitPrice) {
-        if (unitSize.equals(0) || unitPrice.equals(0) || unitPrice.equals(null) || unitSize.equals(null)) {
-            return null;
-        } else {
-            BigDecimal unitSqrMPrice = unitPrice.divide(unitSize, 2, RoundingMode.HALF_UP);
-            return unitSqrMPrice;
-        }
-    }
+
 }
 
