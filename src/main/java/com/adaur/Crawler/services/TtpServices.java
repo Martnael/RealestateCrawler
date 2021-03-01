@@ -28,7 +28,6 @@ public class TtpServices {
 
     public List<Unit> poorise5Crawler() throws IOException {
         // Hardcoded values what are always same
-        String developer = "TTP AS";
         int developerId = 1;
         int projectId = 1;
         int unitTypeId = 1;

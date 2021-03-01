@@ -16,15 +16,42 @@ import java.util.List;
 @Service
 public class KaamosServices {
 
-    public List<Unit> KaamosCrawler(String url) throws IOException {
-        Date date = new Date();     // Scanning date
+    /**
+     * it handles following projects
+     *  kadaka-tee-191a   // project id 1  // year 2020
+     *  kadaka-tee-191b    // project id 2  // year 2020
+     *  kadaka-tee-191c    // project id 3   // year 2020
+     *  iltre-11
+     *  iltre-9
+     *  redise-18
+     *  volmre-21
+     *  volmre-23
+     *  volmre-25
+     *  volmre-27
+     * @param url
+     * @param projectId
+     * @param unitTypeId
+     * @param unitCategoryId
+     * @param unitConstructionYear
+     * @return List of units
+     * @throws IOException
+     */
 
+    public List<Unit> kaamosCrawler(String url, int projectId, int unitTypeId, int unitCategoryId, int unitConstructionYear ) throws IOException {
+        Date date = new Date();     // Scanning date
+        int developerId = 2;
         List<Unit> unitList = new ArrayList<>();   // For collect all new units
         String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36";
         Document pageKaamos = Jsoup.connect(url).userAgent(userAgent).get();
         Elements unitsBody = pageKaamos.select("tbody");
         for (Element elementTr : unitsBody.select("tr")) {
             Unit unit = new Unit();
+            unit.setUnitScanTime(date);
+            unit.setUnitProjectId(projectId);
+            unit.setDeveloperId(developerId);
+            unit.setUnitTypeId(unitTypeId);
+            unit.setUnitCategoryId(unitCategoryId);
+            unit.setUnitConstructionYear(unitConstructionYear);
             unit.setUnitUrl(elementTr.attr("data-href"));
             unit.setUnitNumber(elementTr.select("td").get(0).text());
             unit.setUnitFloor(Integer.parseInt(elementTr.select("td").get(1).text()));
@@ -59,10 +86,10 @@ public class KaamosServices {
             } else {
                 unit.setUnitSqrMPrice(BigDecimal.ZERO);
             }
-
-
             unitList.add(unit);
         }
         return unitList;
     }
+
+
 }

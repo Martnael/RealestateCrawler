@@ -22,13 +22,16 @@ public class Services {
     private CountyEntityRepository countyEntityRepository;
     @Autowired
     private TtpServices ttpServices;
+    @Autowired
+    private KaamosServices kaamosServices;
 
     // All programs under here
 
     public void startTheCrawling() throws IOException {
         crawlingEngine(ttpServices.poorise5Crawler());
-
-
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191a/", 2, 1, 1, 2020));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191b/", 3, 1, 1, 2020));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191c/", 4, 1, 1, 2020));
     }
 
     /**
@@ -209,6 +212,9 @@ public class Services {
         }
         BigDecimal sumOfPrices = unitSqrMPriceValues.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal numberOfUnits = BigDecimal.valueOf(unitSqrMPriceValues.size());
+        if (numberOfUnits.compareTo(BigDecimal.ZERO) == 0) {
+            return BigDecimal.ZERO;
+        }
         return sumOfPrices.divide(numberOfUnits, 2, RoundingMode.HALF_UP );
     }
 
