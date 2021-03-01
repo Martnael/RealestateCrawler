@@ -1,6 +1,7 @@
 package com.adaur.Crawler.services;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Project {
     private int Id;
@@ -16,6 +17,8 @@ public class Project {
     private int statusId;
 
     private BigDecimal sqrMPrice;
+
+    private Date scanDate;
 
     public int getId() {
         return Id;
@@ -87,5 +90,13 @@ public class Project {
 
     public void setSqrMPrice(BigDecimal sqrMPrice) {
         this.sqrMPrice = sqrMPrice;
+    }
+
+    public Date getScanDate() {
+        return scanDate;
+    }
+
+    public void setScanDate(Date scanDate) {
+        this.scanDate = scanDate;
     }
 }

@@ -1,10 +1,7 @@
 package com.adaur.Crawler.repository;
 
 import com.adaur.Crawler.rowMappers.DeveloperRowMapper;
-import com.adaur.Crawler.services.Area;
-import com.adaur.Crawler.services.County;
-import com.adaur.Crawler.services.Developer;
-import com.adaur.Crawler.services.Unit;
+import com.adaur.Crawler.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -193,6 +190,47 @@ public class CrawlerRepository {
         paraMap.put("sqrm_price", unit.getUnitSqrMPrice());
         paraMap.put("id", unit.getUnitId());
         template.update(sql, paraMap);
+    }
+
+    /**
+     * Update project sqr meter price
+     * @param project
+     */
+
+    public void updateProjectSqrMPrice(Project project) {
+        String sql = "UPDATE project SET sqrm_price = :sqrm_price WHERE id = :id";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("id", project.getId());
+        paraMap.put("sqrm_price", project.getSqrMPrice());
+        template.update(sql, paraMap);
+    }
+
+    /**
+     * insert sqr meter price of project to history table
+     * @param project
+     */
+
+    public void insertSqrMPriceToHistory(Project project) {
+        String sql = "INSERT INTO project_sqrm_price_history (project_id, price_date, sqrm_price) VALUES (:project_id, :price_date, :sqrm_price)";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("project_id", project.getId());
+        paraMap.put("sqrm_price", project.getSqrMPrice());
+        paraMap.put("price_date", project.getScanDate());
+        template.update(sql, paraMap);
+    }
+
+    /**
+     * check if we have count with project-id and sqr Meter price. If yes then it means no change in sqr meter price
+     * @param project
+     * @return
+     */
+
+    public int checkProjectSqrMPriceChange(Project project) {
+        String sql = "SELECT COUNT(*) FROM project_sqrm_price_history WHERE project_id = :project_id and sqrm_price = :sqrm_price";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("project_id", project.getId());
+        paraMap.put("sqrm_price", project.getSqrMPrice());
+        return template.queryForObject(sql, paraMap, Integer.class);
     }
 }
 

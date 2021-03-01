@@ -52,17 +52,22 @@ public class Services {
                 crawlerRepository.insertPriceToPriceHistoryTable(unit);
             }
         }
-//        // check and update project average sqr meter price and record it
-//        Project project = new Project();
-//        project.setSqrMPrice(calculateProjectSqrMPrice(unitList));
-//        project.setId();
+        // Make new project and compare prices if it has changed then update both project table and project SqrM price table
+        Project project = new Project();
+        project.setId(unitList.get(0).getUnitProjectId());
+        project.setSqrMPrice(calculateProjectSqrMPrice(unitList));
+        project.setScanDate(unitList.get(0).getUnitScanTime());
+        updateProjectSqrMPrice(project);
+
+        if (crawlerRepository.checkProjectSqrMPriceChange(project) != 1) {
+            crawlerRepository.insertSqrMPriceToHistory(project);
+        }
 
     }
 
-
-
-
-
+    private void updateProjectSqrMPrice(Project project) {
+        crawlerRepository.updateProjectSqrMPrice(project);
+    }
 
 
 
