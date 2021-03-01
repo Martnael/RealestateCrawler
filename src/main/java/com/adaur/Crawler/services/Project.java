@@ -1,5 +1,7 @@
 package com.adaur.Crawler.services;
 
+import java.math.BigDecimal;
+
 public class Project {
     private int Id;
     private String projectName;
@@ -12,6 +14,8 @@ public class Project {
 
     private String statusName;
     private int statusId;
+
+    private BigDecimal sqrMPrice;
 
     public int getId() {
         return Id;
@@ -75,5 +79,13 @@ public class Project {
 
     public void setStatusId(int statusId) {
         this.statusId = statusId;
+    }
+
+    public BigDecimal getSqrMPrice() {
+        return sqrMPrice;
+    }
+
+    public void setSqrMPrice(BigDecimal sqrMPrice) {
+        this.sqrMPrice = sqrMPrice;
     }
 }

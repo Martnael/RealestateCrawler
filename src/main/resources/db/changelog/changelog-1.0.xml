@@ -184,4 +184,45 @@
                                  referencedTableName="project"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="01.03.2021 v.1" author="Mart">
+        <loadData
+                file="db/changelog/area.csv"
+                schemaName="public"
+                tableName="area">
+            <column header="id" name="id" type="skip"/>
+            <column header="area_name" name="area_name" type="string"/>
+            <column header="county_id" name="county_id" type="numeric"/>
+        </loadData>
+    </changeSet>
+    <changeSet id="01.03.2021 v.2" author="Mart">
+        <loadData
+                file="db/changelog/developer.csv"
+                schemaName="public"
+                tableName="developer">
+            <column header="id" name="id" type="skip"/>
+            <column header="developer_name" name="developer_name" type="string"/>
+        </loadData>
+    </changeSet>
+    <changeSet id="01.03.2021 v.3" author="Mart">
+        <loadData
+                file="db/changelog/unit_type.csv"
+                schemaName="public"
+                tableName="unit_type">
+            <column header="id" name="id" type="skip"/>
+            <column header="unit_name" name="unit_name" type="string"/>
+        </loadData>
+    </changeSet>
+    <changeSet id="01.03.2021 v.4" author="Mart">
+        <loadData
+                file="db/changelog/project.csv"
+                schemaName="public"
+                tableName="project">
+            <column header="id" name="id" type="skip"/>
+            <column header="project_name" name="project_name" type="string"/>
+            <column header="developer_id" name="developer_id" type="numeric"/>
+            <column header="area_id" name="area_id" type="numeric"/>
+            <column header="project_status_id" name="project_status_id" type="numeric"/>
+            <column header="sqrm_price" name="sqrm_price" type="skip"/>
+        </loadData>
+    </changeSet>
 </databaseChangeLog>

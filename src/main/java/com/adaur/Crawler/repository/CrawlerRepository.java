@@ -146,7 +146,7 @@ public class CrawlerRepository {
         String sql = "SELECT COUNT(*) FROM unit_price_history WHERE unit_id = :unit_id and unit_price = :unit_price";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("unit_id", unit.getUnitId());
-        paraMap.put("unit_size", unit.getUnitPrice());
+        paraMap.put("unit_price", unit.getUnitPrice());
         return template.queryForObject(sql, paraMap, Integer.class);
     }
 
@@ -155,11 +155,12 @@ public class CrawlerRepository {
      * @param unit
      */
     public void insertPriceToPriceHistoryTable (Unit unit) {
-        String sql = "INSERT INTO unit_price_history (unit_price, price_date, unit_id) VALUES (:unit_price, :price_date, :unit_id)";
+        String sql = "INSERT INTO unit_price_history (unit_price, price_date, unit_id, sqrm_price) VALUES (:unit_price, :price_date, :unit_id, :sqrm_price)";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("unit_price", unit.getUnitPrice());
         paraMap.put("price_date", unit.getUnitScanTime());
         paraMap.put("unit_id", unit.getUnitId());
+        paraMap.put("sqrm_price", unit.getUnitSqrMPrice());
         template.update(sql, paraMap);
     }
 
@@ -170,7 +171,7 @@ public class CrawlerRepository {
      */
 
     public int getUnitId (Unit unit) {
-        String sql = "SELECT FROM unit_info WHERE project_id = :project_id and unit_number = :unit_number";
+        String sql = "SELECT id FROM unit_info WHERE project_id = :project_id and unit_number = :unit_number";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("project_id", unit.getUnitProjectId());
         paraMap.put("unit_number", unit.getUnitNumber());

@@ -37,19 +37,25 @@ public class Services {
      */
     public void crawlingEngine(List<Unit> unitList) {
         for (Unit unit : unitList) {
+
             // Check if unit is already in database, if not insert it to database otherwise just update price and status
             if (!isUnitInDatabase(unit)) {
                 crawlerRepository.addUnitToDB(unit);
+                unit.setUnitId(crawlerRepository.getUnitId(unit));
             } else  {
                 unit.setUnitId(crawlerRepository.getUnitId(unit));
                 crawlerRepository.updateUnitPriceAndStatus(unit);
             }
-            //
-            checkUnitPriceHistory(unit);
 
-
-
+            // Check is there change in price history. If no history or change in price then update table
+            if (crawlerRepository.checkUnitPriceChange(unit) != 1) {
+                crawlerRepository.insertPriceToPriceHistoryTable(unit);
+            }
         }
+//        // check and update project average sqr meter price and record it
+//        Project project = new Project();
+//        project.setSqrMPrice(calculateProjectSqrMPrice(unitList));
+//        project.setId();
 
     }
 
@@ -219,14 +225,4 @@ public class Services {
         }
     }
 
-    /**
-     * Update price_history table if price has been changed.
-     * @param unit
-     */
-
-    public void checkUnitPriceHistory (Unit unit) {
-        if (crawlerRepository.checkUnitPriceChange(unit) != 1) {
-            crawlerRepository.insertPriceToPriceHistoryTable(unit);
-        }
-    }
 }
