@@ -26,11 +26,30 @@ public class Services {
     // All programs under here
 
     public void startTheCrawling() throws IOException {
-        List<Unit> unit = ttpServices.poorise5Crawler();
-        updateProjectDatabase(unit);
+        crawlingEngine(ttpServices.poorise5Crawler());
+
+
+    }
+
+    /**
+     *
+     * @param unitList
+     */
+    public void crawlingEngine(List<Unit> unitList) {
+        for (Unit unit : unitList) {
+            // Check if unit is already in database, if not insert it to database otherwise just update price and status
+            if (!isUnitInDatabase(unit)) {
+                crawlerRepository.addUnitToDB(unit);
+            } else  {
+                unit.setUnitId(crawlerRepository.getUnitId(unit));
+                crawlerRepository.updateUnitPriceAndStatus(unit);
+            }
+            //
+            checkUnitPriceHistory(unit);
 
 
 
+        }
 
     }
 
@@ -154,21 +173,6 @@ public class Services {
     }
 
     /**
-     *
-     * @param unitList
-     */
-
-    public void updateProjectDatabase (List<Unit> unitList) {
-        for (Unit unit : unitList) {
-            if (crawlerRepository.unitCountInDatabase(unit) != 1) {
-                crawlerRepository.addUnitToDB(unit);
-            } else {
-                crawlerRepository.checkUnitPriceChange(unit);
-            }
-        }
-    }
-
-    /**
      * Calculating unit square meter price. If unit price is null then returns null
      * @param unitSize BigDecimal
      * @param unitPrice BigDecimal
@@ -203,13 +207,26 @@ public class Services {
     }
 
     /**
-     * check is unit in unit_info table. If is then only compare price and if needed to change price.
+     * Check if unit is in unit_info table already. If count is one then unit is already in database
      * @param unit
      * @return
      */
     public boolean isUnitInDatabase (Unit unit) {
+        if (crawlerRepository.unitCountInDatabase(unit) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    /**
+     * Update price_history table if price has been changed.
+     * @param unit
+     */
 
-        return true;
+    public void checkUnitPriceHistory (Unit unit) {
+        if (crawlerRepository.checkUnitPriceChange(unit) != 1) {
+            crawlerRepository.insertPriceToPriceHistoryTable(unit);
+        }
     }
 }

@@ -143,7 +143,7 @@ public class CrawlerRepository {
      * @return
      */
     public int checkUnitPriceChange(Unit unit) {
-        String sql = "SELECT COUNT(*) FROM price_history WHERE unit_id = :unit_id and unit_price = :unit_price";
+        String sql = "SELECT COUNT(*) FROM unit_price_history WHERE unit_id = :unit_id and unit_price = :unit_price";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("unit_id", unit.getUnitId());
         paraMap.put("unit_size", unit.getUnitPrice());
@@ -155,7 +155,7 @@ public class CrawlerRepository {
      * @param unit
      */
     public void insertPriceToPriceHistoryTable (Unit unit) {
-        String sql = "INSERT INTO price_history (unit_price, price_date, unit_id) VALUES (:unit_price, :price_date, :unit_id)";
+        String sql = "INSERT INTO unit_price_history (unit_price, price_date, unit_id) VALUES (:unit_price, :price_date, :unit_id)";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("unit_price", unit.getUnitPrice());
         paraMap.put("price_date", unit.getUnitScanTime());
@@ -175,6 +175,23 @@ public class CrawlerRepository {
         paraMap.put("project_id", unit.getUnitProjectId());
         paraMap.put("unit_number", unit.getUnitNumber());
         return template.queryForObject(sql, paraMap, Integer.class);
+    }
+
+    /**
+     * update unit price and status in unit_info table
+     * @param unit
+     */
+
+    public void updateUnitPriceAndStatus(Unit unit) {
+        String sql =    "UPDATE unit_info " +
+                        "SET unit_current_price = :unit_current_price, unit_status_id = :unit_status_id, sqrm_price = :sqrm_price " +
+                        "WHERE id = :id";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("unit_current_price", unit.getUnitPrice());
+        paraMap.put("unit_status_id", unit.getUnitStatusId());
+        paraMap.put("sqrm_price", unit.getUnitSqrMPrice());
+        paraMap.put("id", unit.getUnitId());
+        template.update(sql, paraMap);
     }
 }
 

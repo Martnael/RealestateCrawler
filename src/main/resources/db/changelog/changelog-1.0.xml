@@ -172,16 +172,16 @@
             <column name="sqrm_price" type="numeric"/>
         </addColumn>
     </changeSet>
-<!--    <changeSet id="28.02.2021 v.2" author="Mart">-->
-<!--        <addForeignKeyConstraint baseTableName="unit_info"-->
-<!--                                 baseColumnNames="id"-->
-<!--                                 constraintName="unit_info_to_unit_price_history"-->
-<!--                                 referencedTableName="unit_price_history"-->
-<!--                                 referencedColumnNames="unit_id"/>-->
-<!--        <addForeignKeyConstraint baseTableName="project"-->
-<!--                                 baseColumnNames="id"-->
-<!--                                 constraintName="project_to_project_sqrm_price_history"-->
-<!--                                 referencedTableName="project_sqrm_price_history"-->
-<!--                                 referencedColumnNames="project_id"/>-->
-<!--    </changeSet>-->
+    <changeSet id="28.02.2021 v.2" author="Mart">
+        <addForeignKeyConstraint baseTableName="unit_price_history"
+                                 baseColumnNames="unit_id"
+                                 constraintName="unit_info_to_unit_price_history"
+                                 referencedTableName="unit_info"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="project_sqrm_price_history"
+                                 baseColumnNames="project_id"
+                                 constraintName="project_to_project_sqrm_price_history"
+                                 referencedTableName="project"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>
