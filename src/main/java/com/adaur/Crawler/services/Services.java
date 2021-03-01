@@ -148,11 +148,6 @@ public class Services {
         return counties;
     }
 
-    public ActionResponse editDeveloper(Developer developer) {
-        ActionResponse response = new ActionResponse();
-        return response;
-    }
-
     /**
      * Add new county to the database. with SQL query. Returns response if that county is already in database.
      * County have to be unique.
@@ -230,4 +225,8 @@ public class Services {
         }
     }
 
+    public ActionResponse editDeveloper(Developer developer) {
+        ActionResponse response = new ActionResponse();
+        return response;
+    }
 }

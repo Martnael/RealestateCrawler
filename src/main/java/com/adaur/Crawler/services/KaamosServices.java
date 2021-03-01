@@ -1,10 +1,10 @@
 package com.adaur.Crawler.services;
 
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -13,30 +13,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TestClassForTestingCrawlers {
-    public static void main(String[] args) throws IOException {
-        // Hardcoded values what are always same
-        int developerId = 2;
-        int projectId = 2;
-        int unitTypeId = 1;
-        int unitCategoryId = 1;
-        int unitConstructionYear = 2021;
-        Date date = new Date();
+@Service
+public class KaamosServices {
+
+    public List<Unit> KaamosCrawler(String url) throws IOException {
+        Date date = new Date();     // Scanning date
+
         List<Unit> unitList = new ArrayList<>();   // For collect all new units
         String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36";
-        String url = "https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191a/";     // project id   1
-        String url2 = "https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191b/";    // project id   2
-        String url3 = "https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191c/";    // project id   3
-        String url4 = "https://kaamos.ee/vahtramae/hinnad/iltre-11/";
-        String url5 = "https://kaamos.ee/vahtramae/hinnad/iltre-9/";
-        String url6 = "https://kaamos.ee/vahtramae/hinnad/redise-18/";
-        String url7 = "https://kaamos.ee/vikimoisa/hinnad/volmre-21/";
-        String url8 = "https://kaamos.ee/vikimoisa/hinnad/volmre-23/";
-        String url9 = "https://kaamos.ee/vikimoisa/hinnad/volmre-25/";
-        String url10 = "https://kaamos.ee/vikimoisa/hinnad/volmre-27/";
-
-
-        Document pageKaamos = Jsoup.connect(url10).userAgent(userAgent).get();
+        Document pageKaamos = Jsoup.connect(url).userAgent(userAgent).get();
         Elements unitsBody = pageKaamos.select("tbody");
         for (Element elementTr : unitsBody.select("tr")) {
             Unit unit = new Unit();
@@ -69,27 +54,15 @@ public class TestClassForTestingCrawlers {
             }
 
             // Set unist sqr meter price
-            if(unit.getUnitPrice().compareTo(BigDecimal.ZERO)>0) {
+            if (unit.getUnitPrice().compareTo(BigDecimal.ZERO) > 0) {
                 unit.setUnitSqrMPrice(unit.getUnitPrice().divide(unit.getUnitSize(), 2, RoundingMode.HALF_UP));
             } else {
                 unit.setUnitSqrMPrice(BigDecimal.ZERO);
             }
 
 
-            System.out.println(elementTr.attr("data-href"));
-            System.out.println(elementTr.select("td").get(0).text());
-            System.out.println(elementTr.select("td").get(1).text());
-            System.out.println(elementTr.select("td").get(2).text());
-            System.out.println(elementTr.select("td").get(3).text());
-            System.out.println(elementTr.select("td").get(4).text());
-            System.out.println(elementTr.select("td").get(5).text());
-            System.out.println(unit.getUnitSqrMPrice());
-            System.out.println("-----------------------");
-
+            unitList.add(unit);
         }
-
-
+        return unitList;
     }
-
-
 }
