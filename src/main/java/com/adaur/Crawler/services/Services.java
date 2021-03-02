@@ -39,7 +39,7 @@ public class Services {
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-23/", 9, 1, 1, 2021));
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-25/", 10, 1, 1, 2021));
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-27/", 11, 1, 1, 2021));
-
+        crawlingEngine(kaamosServices.cityzenCrawler("https://kaamos.ee/cityzen/hinnad-ja-plaanid/"));
 
 
 
