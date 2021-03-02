@@ -182,12 +182,13 @@ public class CrawlerRepository {
 
     public void updateUnitPriceAndStatus(Unit unit) {
         String sql =    "UPDATE unit_info " +
-                        "SET unit_current_price = :unit_current_price, unit_status_id = :unit_status_id, sqrm_price = :sqrm_price " +
+                        "SET unit_current_price = :unit_current_price, unit_status_id = :unit_status_id, sqrm_price = :sqrm_price, unit_scan_date = :unit_scan_date " +
                         "WHERE id = :id";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("unit_current_price", unit.getUnitPrice());
         paraMap.put("unit_status_id", unit.getUnitStatusId());
         paraMap.put("sqrm_price", unit.getUnitSqrMPrice());
+        paraMap.put("unit_scan_date", unit.getUnitScanTime());
         paraMap.put("id", unit.getUnitId());
         template.update(sql, paraMap);
     }

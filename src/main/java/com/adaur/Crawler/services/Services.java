@@ -32,6 +32,18 @@ public class Services {
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191a/", 2, 1, 1, 2020));
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191b/", 3, 1, 1, 2020));
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191c/", 4, 1, 1, 2020));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vahtramae/hinnad/iltre-11/", 5, 1, 1, 2021));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vahtramae/hinnad/iltre-9/", 6, 1, 1, 2021));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vahtramae/hinnad/redise-18/", 7, 1, 1, 2021));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-21/", 8, 1, 1, 2021));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-23/", 9, 1, 1, 2021));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-25/", 10, 1, 1, 2021));
+        crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-27/", 11, 1, 1, 2021));
+
+
+
+
+
     }
 
     /**
