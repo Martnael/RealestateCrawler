@@ -41,9 +41,8 @@ public class Services {
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-25/", 10, 1, 1, 2021));
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/vikimoisa/hinnad/volmre-27/", 11, 1, 1, 2021));
         crawlingEngine(kaamosServices.cityzenCrawler("https://kaamos.ee/cityzen/hinnad-ja-plaanid/"));
-
-
-
+        crawlingEngine(ttpServices.jarveTornidCrawler("https://www.jarvetornid.ee/torn-2-korterid/"));
+        crawlingEngine(ttpServices.jarveTornidAriCrawler("https://www.jarvetornid.ee/aripinnad/"));
 
     }
 

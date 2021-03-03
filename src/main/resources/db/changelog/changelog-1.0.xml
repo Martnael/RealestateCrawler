@@ -225,4 +225,50 @@
             <column header="sqrm_price" name="sqrm_price" type="skip"/>
         </loadData>
     </changeSet>
+    <changeSet id="03.03.2021 v.1" author="Mart">
+        <loadData
+                file="db/changelog/project_sqrm_price_history.csv"
+                schemaName="public"
+                tableName="project_sqrm_price_history">
+            <column header="id" name="id" type="skip"/>
+            <column header="sqrm_price" name="sqrm_price" type="numeric"/>
+            <column header="price_date" name="price_date" type="date"/>
+            <column header="project_id" name="project_id" type="numeric"/>
+
+        </loadData>
+    </changeSet>
+    <changeSet id="03.03.2021 v.2" author="Mart">
+        <loadData
+                file="db/changelog/unit_info.csv"
+                schemaName="public"
+                tableName="unit_info">
+            <column header="id" name="id" type="skip"/>
+            <column header="unit_name" name="unit_name" type="string"/>
+            <column header="unit_size" name="unit_size" type="numeric"/>
+            <column header="unit_balcony_size" name="unit_balcony_size" type="numeric"/>
+            <column header="unit_current_price" name="unit_current_price" type="numeric"/>
+            <column header="unit_construction_year" name="unit_construction_year" type="numeric"/>
+            <column header="unit_scan_date" name="unit_scan_date" type="date"/>
+            <column header="unit_status_id" name="unit_status_id" type="numeric"/>
+            <column header="project_id" name="project_id" type="numeric"/>
+            <column header="unit_category_id" name="unit_category_id" type="numeric"/>
+            <column header="unit_type_id" name="unit_type_id" type="numeric"/>
+            <column header="unit_url" name="unit_url" type="string"/>
+            <column header="unit_rooms" name="unit_rooms" type="numeric"/>
+            <column header="unit_floor" name="unit_floor" type="numeric"/>
+            <column header="sqrm_price" name="sqrm_price" type="numeric"/>
+        </loadData>
+    </changeSet>
+    <changeSet id="03.03.2021 v.3" author="Mart">
+        <loadData
+                file="db/changelog/unit_price_history.csv"
+                schemaName="public"
+                tableName="unit_price_history">
+            <column header="id" name="id" type="skip"/>
+            <column header="unit_price" name="unit_price" type="numeric"/>
+            <column header="price_date" name="price_date" type="date"/>
+            <column header="unit_id" name="unit_id" type="numeric"/>
+            <column header="sqrm_price" name="sqrm_price" type="numeric"/>
+        </loadData>
+    </changeSet>
 </databaseChangeLog>

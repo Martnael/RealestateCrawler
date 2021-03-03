@@ -1,2 +1,16 @@
 id,project_name,developer_id,area_id,project_status_id,sqrm_price
-1,Pöörise 5,1,1,1,
+1,Pöörise 5,1,1,1,2301.2
+13,Pöörise 7,1,1,1,2264.57
+2,Kadaka Tee 191a,2,1,1,2585.88
+3,Kadaka Tee 191b,2,1,1,2606.71
+4,Kadaka Tee 191c,2,1,1,0
+5,Iltre Tee 11,2,3,1,0
+6,Iltre Tee 9,2,3,1,0
+7,Redise tee 18,2,3,1,2267.94
+8,Volmre 21,2,2,1,2461.51
+9,Volmre 23,2,2,1,2453.98
+10,Volmre 25,2,2,1,2453.32
+11,Volmre 27,2,2,1,2419.79
+12,CityZen,2,4,1,3864.92
+14,Järve Tornid,1,5,1,2847.96
+15,Järve Tornid Äri,1,5,1,11.55
