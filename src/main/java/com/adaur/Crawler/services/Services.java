@@ -28,7 +28,8 @@ public class Services {
     // All programs under here
 
     public void startTheCrawling() throws IOException {
-        crawlingEngine(ttpServices.poorise5Crawler());
+        crawlingEngine(ttpServices.pooriseCrawler("https://poorise.uusmaa.ee/houses/poorise-5/", 1));
+        crawlingEngine(ttpServices.pooriseCrawler("https://poorise.uusmaa.ee/houses/poorise-7/", 13));
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191a/", 2, 1, 1, 2020));
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191b/", 3, 1, 1, 2020));
         crawlingEngine(kaamosServices.kaamosCrawler("https://kaamos.ee/hobemetsa/hinnad/kadaka-tee-191c/", 4, 1, 1, 2020));
@@ -187,6 +188,7 @@ public class Services {
      * @return
      */
 
+    // TODO finish the function
     public ActionResponse deleteCounty(int countyID) {
         ActionResponse response = new ActionResponse();
         response.setResponseMessage("Deleted from database.");
@@ -243,8 +245,4 @@ public class Services {
         }
     }
 
-    public ActionResponse editDeveloper(Developer developer) {
-        ActionResponse response = new ActionResponse();
-        return response;
-    }
 }

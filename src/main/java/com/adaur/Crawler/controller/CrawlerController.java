@@ -69,10 +69,10 @@ public class CrawlerController {
 
 
 
-    @PutMapping("editdeveloper")
-    public ActionResponse editDeveloper (@RequestBody Developer developer) {
-        return crawlerServices.editDeveloper(developer);
-    }
+//    @PutMapping("editdeveloper")
+//    public ActionResponse editDeveloper (@RequestBody Developer developer) {
+//        return crawlerServices.editDeveloper(developer);
+//    }
 
 
 }

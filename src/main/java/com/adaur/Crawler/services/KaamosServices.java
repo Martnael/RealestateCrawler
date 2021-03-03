@@ -92,6 +92,12 @@ public class KaamosServices {
         return unitList;
     }
 
+    /**
+     * Crawler what is for ZityZen project 12
+     * @param url
+     * @return lIST OF UNITS
+     * @throws IOException
+     */
     public List<Unit> cityzenCrawler(String url) throws IOException {
         Date date = new Date();     // Scanning date
         int developerId = 2;
