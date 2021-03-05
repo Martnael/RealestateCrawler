@@ -271,4 +271,13 @@
             <column header="sqrm_price" name="sqrm_price" type="numeric"/>
         </loadData>
     </changeSet>
+    <changeSet id="04.03.2021 v.1" author="Mart">
+        <createTable tableName="error_log">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" type="int"/>
+            <column name="error_date" type="date"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

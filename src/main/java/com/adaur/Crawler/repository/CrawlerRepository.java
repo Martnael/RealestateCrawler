@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,10 +126,9 @@ public class CrawlerRepository {
      * @return
      */
     public int unitCountInDatabase (Unit unit) {
-        String sql = "SELECT COUNT(*) FROM unit_info WHERE unit_number = :unit_number and unit_size = :unit_size and project_id = :project_id";
+        String sql = "SELECT COUNT(*) FROM unit_info WHERE unit_number = :unit_number and project_id = :project_id";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("unit_number", unit.getUnitNumber());
-        paraMap.put("unit_size", unit.getUnitSize());
         paraMap.put("project_id", unit.getUnitProjectId());
         return template.queryForObject(sql, paraMap, Integer.class);
     }
@@ -233,6 +233,30 @@ public class CrawlerRepository {
         paraMap.put("sqrm_price", project.getSqrMPrice());
         return template.queryForObject(sql, paraMap, Integer.class);
     }
+
+    /**
+     * Log error if something happens during the crawling
+     * @param projectId
+     * @param errorDate
+     */
+
+    public void insertError(int projectId, Date errorDate) {
+        String sql = "INSERT INTO error_log (project_id, error_date) VALUES (:project_id, :error_date)";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("project_id", projectId);
+        paraMap.put("error_date", errorDate);
+        template.update(sql, paraMap);
+    }
+
+
+
+    public int getProjectId(int projectId) {
+        String sql = "SELECT project_status_id FROM project WHERE id = :id";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("project_id", projectId);
+        return template.queryForObject(sql, paraMap, Integer.class);
+    }
+
 }
 
 

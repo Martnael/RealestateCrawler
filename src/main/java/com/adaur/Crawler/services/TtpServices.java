@@ -90,7 +90,7 @@ public class TtpServices {
         return unitList;
     }
 
-    public List<Unit> jarveTornidCrawler(String url) throws IOException {
+    public List<Unit> jarveTornidCrawler(String url, int projectId) throws IOException {
         Date date = new Date();
         List<Unit> unitList = new ArrayList<>();   // For collect all new units
         String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36";
@@ -98,7 +98,7 @@ public class TtpServices {
         Element tbody = pageTornid.select("tbody").get(0);
         for (Element trElement : tbody.select("tr")) {
             Unit unit = new Unit();
-            unit.setUnitProjectId(14);
+            unit.setUnitProjectId(projectId);
             unit.setUnitTypeId(1);
             unit.setUnitCategoryId(1);
             unit.setUnitScanTime(date);
@@ -138,7 +138,7 @@ public class TtpServices {
      * @return
      * @throws IOException
      */
-    public List<Unit> jarveTornidAriCrawler(String url) throws IOException {
+    public List<Unit> jarveTornidAriCrawler(String url, int projectId) throws IOException {
         Date date = new Date();
         List<Unit> unitList = new ArrayList<>();   // For collect all new units
         String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36";
@@ -146,7 +146,7 @@ public class TtpServices {
         Elements tbody = pageTornid.select("tbody");
         for (Element trElement : tbody.select("tr")) {
             Unit unit = new Unit();
-            unit.setUnitProjectId(15);
+            unit.setUnitProjectId(projectId);
             unit.setUnitConstructionYear(2021);
             unit.setUnitScanTime(date);
             unit.setUnitTypeId(1);

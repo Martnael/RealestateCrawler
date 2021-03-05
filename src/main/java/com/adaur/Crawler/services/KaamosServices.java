@@ -98,10 +98,9 @@ public class KaamosServices {
      * @return lIST OF UNITS
      * @throws IOException
      */
-    public List<Unit> cityzenCrawler(String url) throws IOException {
+    public List<Unit> cityzenCrawler(String url, int projectId) throws IOException {
         Date date = new Date();     // Scanning date
         int developerId = 2;
-        int projectId = 12;
         int projectConstructionYear = 2021;
         int unitType = 1;
         int unitCategoryId = 1;
